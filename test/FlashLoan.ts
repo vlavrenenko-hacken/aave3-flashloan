@@ -1,7 +1,7 @@
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
-import {USDC_ADDR, USDC_WHALE, AAVE_POOL_ADDRESS_PROVIDER} from "./config.js";
+import {USDC_ADDR, USDC_DAI_WHALE, AAVE_POOL_ADDRESS_PROVIDER} from "./config.js";
 import IERC20 from './IERC20.json';
 
 describe("FlashLoan Test", function () {
@@ -17,10 +17,10 @@ describe("FlashLoan Test", function () {
 
     await network.provider.request({
           method: "hardhat_impersonateAccount",
-          params: [USDC_WHALE],
+          params: [USDC_DAI_WHALE],
     });
 
-    const whale = await ethers.getSigner(USDC_WHALE);
+    const whale = await ethers.getSigner(USDC_DAI_WHALE);
     return {usdc, flashloan, whale}
   }
 
@@ -30,4 +30,11 @@ describe("FlashLoan Test", function () {
     expect(await usdc.allowance(whale.address, flashloan.address)).to.eq(FEE_AMOUNT);
     await flashloan.connect(whale).aaveFlashloanSimple(USDC_ADDR, BORROW_AMOUNT);
   });
+
+  it("Should borrow 1kk USDC 1kk DAI using an Aave Flashloan", async function () {
+    
+
+
+
+  })
 });
