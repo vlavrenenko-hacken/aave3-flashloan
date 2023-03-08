@@ -1,5 +1,4 @@
-import { time, loadFixture } from "@nomicfoundation/hardhat-network-helpers";
-import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import {USDC_ADDR, USDC_WHALE, AAVE_POOL_ADDRESS_PROVIDER} from "./config.js";
@@ -11,7 +10,7 @@ describe("FlashLoan Test", function () {
   const FEE_AMOUNT = BORROW_AMOUNT.mul(5).div(10000) //0.05% = 500 USDC
 
   async function deployFixture() {
-    const usdc = new ethers.Contract(USDC_ADDR, IERC20);
+    const usdc = await ethers.getContractAt(IERC20, USDC_ADDR);
     const FlashLoanSimple = await ethers.getContractFactory("AaveFlashloan");
     const flashloan = await FlashLoanSimple.deploy(AAVE_POOL_ADDRESS_PROVIDER);
     await flashloan.deployed();
