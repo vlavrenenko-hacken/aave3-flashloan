@@ -8,6 +8,6 @@ const USDC_DAI_WHALE = process.env.USDC_DAI_WHALE;
 module.exports = {
     USDC_ADDR,
     DAI_ADDR,
-    USDC_WHALE,
+    USDC_DAI_WHALE,
     AAVE_POOL_ADDRESS_PROVIDER
 }
