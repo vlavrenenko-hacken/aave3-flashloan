@@ -16,7 +16,7 @@ contract AaveFlashloan is FlashLoanSimpleReceiverBase {
         FlashLoanSimpleReceiverBase(provider)
     {}
 
-    function aaveFlashloan(address loanToken, uint256 loanAmount) external {
+    function aaveFlashloanSimple(address loanToken, uint256 loanAmount) external {
         uint fee = ((loanAmount*5)/10000);
         IERC20(loanToken).transferFrom(msg.sender, address(this), fee); // User should have approve the fee amount before calling aaveFlashloan() function
         IPool(address(POOL)).flashLoanSimple(
